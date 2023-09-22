@@ -16,6 +16,8 @@ function divide(...args) {
 
 
 function doTheMath() {
+    firstNumber = Number(firstNumber);
+    secondNumber = Number(secondNumber);
     switch(functionToUse) {
         case '+':
             firstNumber = Math.round(((add(firstNumber, secondNumber)) + Number.EPSILON) * 1000000) / 1000000;
@@ -74,21 +76,22 @@ document.addEventListener('keydown', (e) => {
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
         console.log(button.id);
+        console.log(button.id);
         if (!numberToggle) {
-            if (firstNumber === undefined || displayNumber.textContent === '0') {
+            if (firstNumber === undefined || displayNumber.textContent === '0' || displayNumber.textContent === '0') {
                 displayNumber.textContent = button.textContent;
                 firstNumber = Number(displayNumber.textContent);
             } else if (displayNumber.textContent.length < 10) {
                 displayNumber.textContent += button.textContent;
-                firstNumber = Number(displayNumber.textContent);
+                firstNumber = displayNumber.textContent;
             };
         } else {
-            if (secondNumber === undefined || displayNumber.textContent === '0') {
+            if (secondNumber === undefined || displayNumber.textContent === '0' || displayNumber.textContent === '0') {
                 displayNumber.textContent = button.textContent;
                 secondNumber = Number(displayNumber.textContent);
             } else if (displayNumber.textContent.length < 10) {
                 displayNumber.textContent += button.textContent;
-                secondNumber = Number(displayNumber.textContent);
+                secondNumber = displayNumber.textContent;
             };
         }
     });
@@ -98,12 +101,12 @@ backSpace.addEventListener('click', () => {
     if (!numberToggle) {
         if (firstNumber !== undefined) {
             displayNumber.textContent = displayNumber.textContent.slice(0, -1);
-            firstNumber = Number(displayNumber.textContent);
+            firstNumber = displayNumber.textContent;
         };
     } else {
         if (secondNumber !== undefined) {
             displayNumber.textContent = displayNumber.textContent.slice(0, -1);
-            secondNumber = Number(displayNumber.textContent);
+            secondNumber = displayNumber.textContent;
         };
     }
 });
@@ -111,26 +114,23 @@ backSpace.addEventListener('click', () => {
 
 decimalButton.addEventListener('click', () => {
     if (!numberToggle) {
-        if (firstNumber === undefined) {
-            displayNumber.textContent = decimalButton.textContent;
-            firstNumber = Number(displayNumber.textContent);
-        } else if ((firstNumber.toString().length < 10) && (firstNumber % 1 === 0)) {
+        if (displayNumber.textContent === '0') {
             displayNumber.textContent += decimalButton.textContent;
-            firstNumber = Number(displayNumber.textContent);
+            firstNumber = displayNumber.textContent;
+        } else if ((displayNumber.textContent.length < 10) && (firstNumber % 1 === 0)) {
+            displayNumber.textContent += decimalButton.textContent;
+            firstNumber = displayNumber.textContent;
         };
     } else {
         if (secondNumber === undefined) {
-            displayNumber.textContent = decimalButton.textContent;
-            secondNumber = Number(displayNumber.textContent);
-        } else if ((secondNumber.toString().length < 10) && (secondNumber % 1 === 0)) {
+            displayNumber.textContent = '0' + decimalButton.textContent;
+            secondNumber = displayNumber.textContent;
+        } else if ((displayNumber.textContent.length < 10) && (secondNumber % 1 === 0)) {
             displayNumber.textContent += decimalButton.textContent;
-            secondNumber = Number(displayNumber.textContent);
+            secondNumber = displayNumber.textContent;
         };
     }
 });
-
-
-
 
 clearButton.addEventListener('click', () => {
     displayNumber.textContent = 0;
