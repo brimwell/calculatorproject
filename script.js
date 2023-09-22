@@ -73,19 +73,20 @@ document.addEventListener('keydown', (e) => {
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
+        console.log(button.id);
         if (!numberToggle) {
-            if (firstNumber === undefined) {
+            if (firstNumber === undefined || displayNumber.textContent === '0') {
                 displayNumber.textContent = button.textContent;
                 firstNumber = Number(displayNumber.textContent);
-            } else if (firstNumber.toString().length < 10) {
+            } else if (displayNumber.textContent.length < 10) {
                 displayNumber.textContent += button.textContent;
                 firstNumber = Number(displayNumber.textContent);
             };
         } else {
-            if (secondNumber === undefined) {
+            if (secondNumber === undefined || displayNumber.textContent === '0') {
                 displayNumber.textContent = button.textContent;
                 secondNumber = Number(displayNumber.textContent);
-            } else if (secondNumber.toString().length < 10) {
+            } else if (displayNumber.textContent.length < 10) {
                 displayNumber.textContent += button.textContent;
                 secondNumber = Number(displayNumber.textContent);
             };
