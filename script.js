@@ -75,10 +75,8 @@ document.addEventListener('keydown', (e) => {
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        console.log(button.id);
-        console.log(button.id);
         if (!numberToggle) {
-            if (firstNumber === undefined || displayNumber.textContent === '0' || displayNumber.textContent === '0') {
+            if (firstNumber === undefined || displayNumber.textContent === '0') {
                 displayNumber.textContent = button.textContent;
                 firstNumber = Number(displayNumber.textContent);
             } else if (displayNumber.textContent.length < 10) {
@@ -86,7 +84,9 @@ numberButtons.forEach((button) => {
                 firstNumber = displayNumber.textContent;
             };
         } else {
-            if (secondNumber === undefined || displayNumber.textContent === '0' || displayNumber.textContent === '0') {
+            if (functionToUse === undefined) {
+                
+            } else if (secondNumber === undefined || displayNumber.textContent === '0') {
                 displayNumber.textContent = button.textContent;
                 secondNumber = Number(displayNumber.textContent);
             } else if (displayNumber.textContent.length < 10) {
@@ -122,7 +122,9 @@ decimalButton.addEventListener('click', () => {
             firstNumber = displayNumber.textContent;
         };
     } else {
-        if (secondNumber === undefined) {
+        if (functionToUse === undefined) {
+                
+        } else if (secondNumber === undefined) {
             displayNumber.textContent = '0' + decimalButton.textContent;
             secondNumber = displayNumber.textContent;
         } else if ((displayNumber.textContent.length < 10) && (secondNumber % 1 === 0)) {
