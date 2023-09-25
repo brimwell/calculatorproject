@@ -1,43 +1,25 @@
-function add(...args) {
-    return args.reduce( (acc, cur) => acc + cur, 0);
-}
-
-function sub(...args) {
-    return args.reduce((acc, cur) => acc - cur);
-}
-
-function mult(...args) {
-    return args.reduce((acc, cur) => acc * cur);
-}
-
-function divide(...args) {
-    return args.reduce((acc, cur) => acc / cur);
-}
-
-
 function doTheMath() {
     firstNumber = Number(firstNumber);
     secondNumber = Number(secondNumber);
     switch(functionToUse) {
         case '+':
-            firstNumber = Math.round(((add(firstNumber, secondNumber)) + Number.EPSILON) * 1000000) / 1000000;
+            firstNumber = Math.round(((firstNumber + secondNumber) + Number.EPSILON) * 1000000) / 1000000;
             break;
         case '-':
-            firstNumber = Math.round(((sub(firstNumber, secondNumber)) + Number.EPSILON) * 1000000) / 1000000;
+            firstNumber = Math.round(((firstNumber - secondNumber) + Number.EPSILON) * 1000000) / 1000000;
             break;
         case '*':
-            firstNumber = Math.round(((mult(firstNumber, secondNumber)) + Number.EPSILON) * 1000000) / 1000000;
+            firstNumber = Math.round(((firstNumber * secondNumber) + Number.EPSILON) * 1000000) / 1000000;
             break;
         case '/':
-            firstNumber = Math.round(((divide(firstNumber, secondNumber)) + Number.EPSILON) * 1000000) / 1000000;
+            firstNumber = Math.round(((firstNumber / secondNumber) + Number.EPSILON) * 1000000) / 1000000;
             break;
         default:
     };
     secondNumber = undefined;
-    if (firstNumber && isFinite(firstNumber)) {
+    if (isFinite(firstNumber)) {
         displayNumber.textContent = firstNumber;
-    };
-    if (!isFinite(firstNumber)) {
+    } else {
         displayNumber.textContent = 'Error. Press Clear and try again';
     }
 }
@@ -58,27 +40,27 @@ let functionToUse;
 
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === '.' || (e.key >= 0 && e.key <= 9)) {
+    if (e.key === '.' || 
+        (e.key >= 0 && e.key <= 9) || 
+        e.key === '+' || 
+        e.key === '-' || 
+        e.key === '/' || 
+        e.key === '*' || 
+        e.key === 'Escape' || 
+        e.key === 'Backspace') {
         document.getElementById(e.key + "btn").click();
-    };
-    if (e.key === '+' || e.key === '-' || e.key === '/' || e.key === '*') {
-        document.getElementById(e.key + 'btn').click();
     };
     if (e.key === 'Enter') {
         document.getElementById('equals').click();
     };
-    if (e.key === 'Escape' || e.key === 'Backspace') {
-        document.getElementById(e.key + 'btn').click();
-    };
 });
-
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
         if (!numberToggle) {
             if (firstNumber === undefined || displayNumber.textContent === '0') {
                 displayNumber.textContent = button.textContent;
-                firstNumber = Number(displayNumber.textContent);
+                firstNumber = displayNumber.textContent;
             } else if (displayNumber.textContent.length < 10) {
                 displayNumber.textContent += button.textContent;
                 firstNumber = displayNumber.textContent;
@@ -88,7 +70,7 @@ numberButtons.forEach((button) => {
                 
             } else if (secondNumber === undefined || displayNumber.textContent === '0') {
                 displayNumber.textContent = button.textContent;
-                secondNumber = Number(displayNumber.textContent);
+                secondNumber = displayNumber.textContent;
             } else if (displayNumber.textContent.length < 10) {
                 displayNumber.textContent += button.textContent;
                 secondNumber = displayNumber.textContent;
@@ -150,7 +132,6 @@ operatorButtons.forEach((button) => {
         } else if (firstNumber !== undefined) {
             numberToggle = true;
             functionToUse = button.textContent;
-            //displayNumber.textContent = 0;
         } 
     });
 });
