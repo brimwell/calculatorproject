@@ -1,11 +1,5 @@
 # calculatorproject
 
-NEXT:
-
-
--- Design and make look nice
-
-
-
+A project from The Odin Project - Completed in Sep. 2023
 
 

@@ -86,3 +86,9 @@ h2 {
     color: white;
     font-size: 1.8em;
 }
+
+footer {
+    text-align: center;
+    font-style: italic;
+    font-size: .7em;
+}
